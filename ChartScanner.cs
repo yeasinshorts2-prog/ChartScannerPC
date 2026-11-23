@@ -411,12 +411,13 @@ namespace ChartScannerPC
                 };
 
                 string jsonBody = serializer.Serialize(payload);
-                string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
+                string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.Method = "POST";
-                req.ContentType = "application/json";
-                req.Timeout = 25000;
+HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+req.Method = "POST";
+req.ContentType = "application/json";
+req.Headers.Add("X-goog-api-key", apiKey);
+req.Timeout = 25000;
 
                 byte[] bytes = Encoding.UTF8.GetBytes(jsonBody);
                 req.ContentLength = bytes.Length;
